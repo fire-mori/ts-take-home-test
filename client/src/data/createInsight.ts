@@ -1,7 +1,6 @@
 import type { Insight } from "../schemas/insight.ts";
 
 export const createInsight = async (params: Omit<Insight, "id">) => {
-  console.log(params);
   try {
     const response = await fetch(`/api/insight`, {
       method: "POST",
