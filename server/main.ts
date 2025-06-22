@@ -15,12 +15,11 @@ const env = {
 const dbFilePath = path.resolve("tmp", "db.sqlite3");
 
 console.log(`Opening SQLite database at ${dbFilePath}`);
-
+// We can not use sqlite in production, this has to be replaced with postgresSQL connection or something else
 await Deno.mkdir(path.dirname(dbFilePath), { recursive: true });
 const db = new Database(dbFilePath);
 
 console.log("Initialising server");
-
 const router = new oak.Router();
 
 router.get("/_health", (ctx) => {
@@ -31,7 +30,7 @@ router.get("/_health", (ctx) => {
 router.get("/insights", (ctx) => {
   const result = listInsights({ db });
   ctx.response.body = result;
-  ctx.response.body = 200;
+  ctx.response.status = 200;
 });
 
 router.get("/insights/:id", (ctx) => {
