@@ -5,6 +5,8 @@ import * as path from "@std/path";
 import { Port } from "../lib/utils/index.ts";
 import listInsights from "./operations/list-insights.ts";
 import lookupInsight from "./operations/lookup-insight.ts";
+import createInsight from "./operations/create-insight.ts";
+import { Insight } from "$models/insight.ts";
 
 console.log("Loading configuration");
 
@@ -27,12 +29,6 @@ router.get("/_health", (ctx) => {
   ctx.response.status = 200;
 });
 
-router.get("/insights", (ctx) => {
-  const result = listInsights({ db });
-  ctx.response.body = result;
-  ctx.response.status = 200;
-});
-
 router.get("/insights/:id", (ctx) => {
   const params = ctx.params as Record<string, any>;
   const result = lookupInsight({ db, id: params.id });
@@ -40,11 +36,31 @@ router.get("/insights/:id", (ctx) => {
   ctx.response.status = 200;
 });
 
-router.get("/insights/create", (ctx) => {
-  // TODO
+router.get("/insights", (ctx) => {
+  const result = listInsights({ db });
+  ctx.response.body = result;
+  ctx.response.status = 200;
 });
 
-router.get("/insights/delete", (ctx) => {
+router.post("/insight", async (ctx) => {
+  const params = await ctx.request.body.json() as Record<string, any>;
+
+  const insightData = Insight.parse({
+    brand: params.brand,
+    createdAt: new Date(params.createdAt),
+    text: params.text,
+  });
+
+  createInsight({
+    db,
+    ...insightData,
+  });
+
+  ctx.response.body = "OK";
+  ctx.response.status = 200;
+});
+
+router.delete("/insight", (ctx) => {
   // TODO
 });
 

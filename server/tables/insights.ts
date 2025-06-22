@@ -7,18 +7,10 @@ export const createTable = `
   )
 `;
 
-export type Row = {
-  id: number;
-  brand: number;
-  createdAt: string;
-  text: string;
-};
+export const selectAllStatement = `SELECT * FROM insights`;
 
-export type Insert = {
-  brand: number;
-  createdAt: string;
-  text: string;
-};
+export const selectByIdStatement =
+  `SELECT * FROM insights WHERE id = ? LIMIT 1`;
 
-export const insertStatement = (item: Insert) =>
-  `INSERT INTO insights (brand, createdAt, text) VALUES (${item.brand}, '${item.createdAt}', '${item.text}')`;
+export const insertStatement =
+  `INSERT INTO insights (brand, createdAt, text) VALUES (?, ?, ?)`;

@@ -34,7 +34,7 @@ describe("listing insights in the database", () => {
         fixture.insights.insert(
           insights.map((it) => ({
             ...it,
-            createdAt: it.createdAt.toISOString(),
+            createdAt: it.createdAt,
           })),
         );
         result = lookupInsight({ ...fixture, id: 3 });

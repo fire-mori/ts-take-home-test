@@ -7,9 +7,10 @@ await Deno.mkdir(path.dirname(dbFilePath), { recursive: true });
 const db = new Database(dbFilePath);
 db.exec(insightsTable.createTable);
 db.exec(
-  insightsTable.insertStatement({
-    brand: 123,
-    createdAt: new Date().toISOString(),
-    text: "text",
-  }),
+  insightsTable.insertStatement,
+  [
+    123,
+    new Date().toISOString(),
+    "text",
+  ],
 );
