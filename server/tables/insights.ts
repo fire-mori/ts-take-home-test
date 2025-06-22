@@ -1,24 +1,18 @@
 export const createTable = `
   CREATE TABLE insights (
     id INTEGER PRIMARY KEY ASC NOT NULL,
-    brand INTEGER NOT NULL,
+    brandId INTEGER NOT NULL,
     createdAt TEXT NOT NULL,
     text TEXT NOT NULL
   )
 `;
 
-export type Row = {
-  id: number;
-  brand: number;
-  createdAt: string;
-  text: string;
-};
+export const selectAllStatement = `SELECT * FROM insights`;
 
-export type Insert = {
-  brand: number;
-  createdAt: string;
-  text: string;
-};
+export const selectByIdStatement =
+  `SELECT * FROM insights WHERE id = ? LIMIT 1`;
 
-export const insertStatement = (item: Insert) =>
-  `INSERT INTO insights (brand, createdAt, text) VALUES (${item.brand}, '${item.createdAt}', '${item.text}')`;
+export const insertStatement =
+  `INSERT INTO insights (brandId, createdAt, text) VALUES (?, ?, ?)`;
+
+export const deleteStatement = `DELETE FROM insights WHERE id = ?`;
