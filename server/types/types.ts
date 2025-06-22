@@ -1,12 +1,16 @@
 export type Row = {
   id: number;
-  brand: number;
+  brandId: number;
   createdAt: Date;
   text: string;
 };
 
 export type Insert = {
-  brand: number;
+  brandId: number;
   createdAt: Date;
   text: string;
+};
+
+export type Delete = {
+  id: number;
 };

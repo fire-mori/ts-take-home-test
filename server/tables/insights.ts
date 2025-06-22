@@ -1,7 +1,7 @@
 export const createTable = `
   CREATE TABLE insights (
     id INTEGER PRIMARY KEY ASC NOT NULL,
-    brand INTEGER NOT NULL,
+    brandId INTEGER NOT NULL,
     createdAt TEXT NOT NULL,
     text TEXT NOT NULL
   )
@@ -13,4 +13,6 @@ export const selectByIdStatement =
   `SELECT * FROM insights WHERE id = ? LIMIT 1`;
 
 export const insertStatement =
-  `INSERT INTO insights (brand, createdAt, text) VALUES (?, ?, ?)`;
+  `INSERT INTO insights (brandId, createdAt, text) VALUES (?, ?, ?)`;
+
+export const deleteStatement = `DELETE FROM insights WHERE id = ?`;

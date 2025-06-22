@@ -5,12 +5,12 @@ import type { HasDBClient } from "../shared.ts";
 type Input = HasDBClient & Insert;
 
 export default (input: Input) => {
-  const { brand, createdAt, text } = input;
+  const { brandId, createdAt, text } = input;
 
   input.db
     .exec(
       insightsTable.insertStatement,
-      [brand, createdAt, text],
+      [brandId, createdAt, text],
     );
 
   console.log("Insight created");
