@@ -2,6 +2,7 @@ import { Trash2Icon } from "lucide-react";
 import { cx } from "../../lib/cx.ts";
 import styles from "./insights.module.css";
 import type { Insight } from "../../schemas/insight.ts";
+import { deleteInsight } from "../../data/deleteInsight.ts";
 
 type InsightsProps = {
   insights: Insight[];
@@ -9,7 +10,9 @@ type InsightsProps = {
 };
 
 export const Insights = ({ insights, className }: InsightsProps) => {
-  const deleteInsight = () => undefined;
+  const handleDeleteInsight = async (id: number) => {
+    await deleteInsight(id);
+  };
 
   return (
     <div className={cx(className)}>
@@ -27,7 +30,7 @@ export const Insights = ({ insights, className }: InsightsProps) => {
                     <span>{createdAtDate}</span>
                     <Trash2Icon
                       className={styles["insight-delete"]}
-                      onClick={deleteInsight}
+                      onClick={() => handleDeleteInsight(id)}
                     />
                   </div>
                 </div>

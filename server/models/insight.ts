@@ -1,8 +1,8 @@
 import { z } from "zod";
 
 export const Insight = z.object({
-  id: z.number().int().min(0).optional(),
-  brand: z.number().int().min(0),
+  id: z.number().int().min(0),
+  brandId: z.number().int().min(0),
   createdAt: z.date(),
   text: z.string(),
 });

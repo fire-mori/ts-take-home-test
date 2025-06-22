@@ -8,6 +8,7 @@ type Fixture = HasDBClient & {
   insights: {
     insert(insights: Insert[]): void;
     selectAll(): Row[];
+    deleteAll(): void;
   };
 };
 
@@ -26,10 +27,13 @@ export const withDB = <R>(fn: (fixture: Fixture) => R): R => {
       selectAll() {
         return db.sql<Row>`SELECT * FROM insights`;
       },
+      deleteAll() {
+        return db.sql<Row>`DELETE FROM insights`;
+      },
       insert(insights) {
         for (const item of insights) {
           db.exec(insightsTable.insertStatement, [
-            item.brand,
+            item.brandId,
             item.createdAt,
             item.text,
           ]);
