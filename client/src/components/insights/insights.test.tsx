@@ -5,10 +5,10 @@ import { Insights } from "./insights.tsx";
 const TEST_INSIGHTS = [
   {
     brandId: 1,
-    date: new Date(),
+    createdAt: new Date(),
     text: "Test insight",
   },
-  { brandId: 2, date: new Date(), text: "Another test insight" },
+  { brandId: 2, createdAt: new Date(), text: "Another test insight" },
 ];
 
 describe("insights", () => {
